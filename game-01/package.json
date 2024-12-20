@@ -1,0 +1,11 @@
+{
+  "name": "game-01",
+  "version": "1.0.0",
+  "description": "game 01",
+  "main": "game_01.js",
+  "scripts": {
+    "test": "test-g"
+  },
+  "author": "Daniel Matos",
+  "license": "ISC"
+}
