@@ -25,11 +25,11 @@ export class GildedRose {
             const category = getCategory(this.items[i].name);
 
             if (category == ItemCategory.SULFURAS){
-                this.items[i].quality = 80; //This quality set could be done in the Item constructor, if Mr. Goglin allows it.
+                this.items[i].quality = 80; //This quality set protection could be done in the Item constructor, if Mr. Goglin allows it.
                 continue;
             }
             
-            this.items[i].sellIn = this.items[i].sellIn - 1;
+            this.items[i].sellIn = this.items[i].sellIn - 1; //All items gets older by one day
 
             if (category == ItemCategory.BACKSTAGE_PASSES){
                 if (this.items[i].sellIn < 0){
@@ -71,7 +71,8 @@ export class GildedRose {
 
     private static decreaseQualityForItem(itemNumber: number) {
         if (this.items[itemNumber].quality > 0) {
-            this.items[itemNumber].quality = this.items[itemNumber].quality - 1
+            const multiplier = (getCategory(this.items[itemNumber].name) == ItemCategory.CONJURED)? 2 : 1;
+            this.items[itemNumber].quality = this.items[itemNumber].quality - (1 * multiplier);
         }
     }
 

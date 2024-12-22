@@ -93,6 +93,22 @@ describe('GildedRose', function() {
         expect(items[0].quality).to.equal(50);
     });
 
+    it('should decrease quality twice as fast for Conjured items', function() {
+        const items = [new Item('Conjured Mana Cake', 3, 6)];
+        const gildedRose = new GildedRose(items);
+        GildedRose.updateQuality();
+        expect(items[0].sellIn).to.equal(2);
+        expect(items[0].quality).to.equal(4);
+    });
+
+    it('should decrease quality twice as fast for Conjured items even if they are expired', function() {
+        const items = [new Item('Conjured Mana Cake', 0, 6)];
+        const gildedRose = new GildedRose(items);
+        GildedRose.updateQuality();
+        expect(items[0].sellIn).to.equal(-1);
+        expect(items[0].quality).to.equal(2);
+    });
+
     it('should handle all items according to their categories', function() {
         const items = [
             new Item('Sulfuras, Hand of Ragnaros', 0, 80),
@@ -101,7 +117,8 @@ describe('GildedRose', function() {
             new Item('Aged Brie II', 2, 0),
             new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
             new Item('Backstaged other pass', 15, 20),
-            new Item('Elixir of the Mongoose', 5, 7)
+            new Item('Elixir of the Mongoose', 5, 7),
+            new Item('Conjured Mana Cake', 3, 6)
         ];
         const gildedRose = new GildedRose(items);
         GildedRose.updateQuality();
@@ -126,5 +143,8 @@ describe('GildedRose', function() {
 
         expect(items[6].sellIn).to.equal(4);
         expect(items[6].quality).to.equal(6);
+
+        expect(items[7].sellIn).to.equal(2);
+        expect(items[7].quality).to.equal(4);
     });
 });
