@@ -27,7 +27,7 @@ export class GildedRose {
 
             if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert'){
                 if (this.items[i].sellIn < 0){
-                    this.items[i].quality = this.items[i].quality - this.items[i].quality;
+                    this.dropQualityToZero(i);
                     continue;
                 }
 
@@ -47,15 +47,10 @@ export class GildedRose {
                 continue;
             }
 
-            
-            if (this.items[i].quality > 0) {
-                this.items[i].quality = this.items[i].quality - 1
-            }
+            this.decreaseQualityForItem(i);
             
             if (this.items[i].sellIn < 0) {
-                if (this.items[i].quality > 0) {
-                    this.items[i].quality = this.items[i].quality - 1
-                }
+                this.decreaseQualityForItem(i);
             }
         }
 
@@ -66,5 +61,15 @@ export class GildedRose {
         if (this.items[itemNumber].quality < 50) {
             this.items[itemNumber].quality = this.items[itemNumber].quality + 1
         }
+    }
+
+    private static decreaseQualityForItem(itemNumber: number) {
+        if (this.items[itemNumber].quality > 0) {
+            this.items[itemNumber].quality = this.items[itemNumber].quality - 1
+        }
+    }
+
+    private static dropQualityToZero(itemNumber: number) {
+        this.items[itemNumber].quality = 0;
     }
 }
