@@ -21,6 +21,14 @@ describe('GildedRose', function() {
         expect(items[0].quality).to.equal(80);
     });
 
+    it('sould be always quality 80 for Sulfuras items', function() {
+        const items = [new Item('Sulfuras, Hand of Ragnaros', 0, 0)];
+        const gildedRose = new GildedRose(items);
+        GildedRose.updateQuality();
+        expect(items[0].sellIn).to.equal(0);
+        expect(items[0].quality).to.equal(80);
+    });
+
     it('should increase quality for Aged Brie', function() {
         const items = [new Item('Aged Brie', 2, 0)];
         const gildedRose = new GildedRose(items);

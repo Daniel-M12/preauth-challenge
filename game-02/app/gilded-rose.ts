@@ -20,6 +20,7 @@ export class GildedRose {
     static updateQuality() {
         for (let i = 0; i < this.items.length; i++) {
             if (this.items[i].name == 'Sulfuras, Hand of Ragnaros') {
+                this.items[i].quality = 80; //This quality set could be done in the Item constructor, if Mr. Goglin allows it.
                 continue;
             }
             
