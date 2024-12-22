@@ -21,7 +21,7 @@ describe('GildedRose', function() {
         expect(items[0].quality).to.equal(80);
     });
 
-    it('sould be always quality 80 for Sulfuras items', function() {
+    it('should be always quality 80 for Sulfuras items', function() {
         const items = [new Item('Sulfuras, Hand of Ragnaros', 0, 0)];
         const gildedRose = new GildedRose(items);
         GildedRose.updateQuality();
@@ -91,5 +91,40 @@ describe('GildedRose', function() {
         GildedRose.updateQuality();
         expect(items[0].sellIn).to.equal(1);
         expect(items[0].quality).to.equal(50);
+    });
+
+    it('should handle all items according to their categories', function() {
+        const items = [
+            new Item('Sulfuras, Hand of Ragnaros', 0, 80),
+            new Item('Sulfuras, other legenday', 0, 70),
+            new Item('Aged Brie', 2, 0),
+            new Item('Aged Brie II', 2, 0),
+            new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
+            new Item('Backstaged other pass', 15, 20),
+            new Item('Elixir of the Mongoose', 5, 7)
+        ];
+        const gildedRose = new GildedRose(items);
+        GildedRose.updateQuality();
+
+        expect(items[0].sellIn).to.equal(0);
+        expect(items[0].quality).to.equal(80);
+
+        expect(items[1].sellIn).to.equal(0);
+        expect(items[1].quality).to.equal(80);
+
+        expect(items[2].sellIn).to.equal(1);
+        expect(items[2].quality).to.equal(1);
+
+        expect(items[3].sellIn).to.equal(1);
+        expect(items[3].quality).to.equal(1);
+
+        expect(items[4].sellIn).to.equal(14);
+        expect(items[4].quality).to.equal(21);
+
+        expect(items[5].sellIn).to.equal(14);
+        expect(items[5].quality).to.equal(21);
+
+        expect(items[6].sellIn).to.equal(4);
+        expect(items[6].quality).to.equal(6);
     });
 });

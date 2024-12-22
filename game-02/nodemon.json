@@ -1,5 +1,5 @@
 {
-    "watch": ["test", "app"],
+    "watch": ["src/test", "src/app"],
     "ext": "js,ts",
-    "exec": "npx mocha --require ts-node/register 'test/**/*.ts'"
+    "exec": "npx mocha --require ts-node/register 'src/test/**/*.spec.ts'"
 }

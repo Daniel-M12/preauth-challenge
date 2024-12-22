@@ -1,3 +1,6 @@
+import { getCategory } from './map-category-items';
+import { ItemCategory } from './item-category';
+
 export class Item {
     name: string;
     sellIn: number;
@@ -19,14 +22,16 @@ export class GildedRose {
 
     static updateQuality() {
         for (let i = 0; i < this.items.length; i++) {
-            if (this.items[i].name == 'Sulfuras, Hand of Ragnaros') {
+            const category = getCategory(this.items[i].name);
+
+            if (category == ItemCategory.SULFURAS){
                 this.items[i].quality = 80; //This quality set could be done in the Item constructor, if Mr. Goglin allows it.
                 continue;
             }
             
             this.items[i].sellIn = this.items[i].sellIn - 1;
 
-            if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert'){
+            if (category == ItemCategory.BACKSTAGE_PASSES){
                 if (this.items[i].sellIn < 0){
                     this.dropQualityToZero(i);
                     continue;
@@ -43,7 +48,7 @@ export class GildedRose {
                 continue;
             }
 
-            if (this.items[i].name == 'Aged Brie') {
+            if (category == ItemCategory.AGED_BRIE){
                 this.increaseQualityForItem(i);
                 continue;
             }
