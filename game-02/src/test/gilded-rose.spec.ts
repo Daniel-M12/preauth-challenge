@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { GildedRose, Item } from '../app/gilded-rose';
+import { GildedRose } from '../app/gilded-rose';
+import { Item } from '../app/item';
 
 // FILE: game-02/app/gilded-rose.test.ts
 

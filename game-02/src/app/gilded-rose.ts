@@ -1,23 +1,46 @@
 import { getCategory } from './map-category-items';
 import { ItemCategory } from './item-category';
-
-export class Item {
-    name: string;
-    sellIn: number;
-    quality: number;
-
-    constructor(name, sellIn, quality) {
-        this.name = name;
-        this.sellIn = sellIn;
-        this.quality = quality;
-    }
-}
+import { ItemFactory } from './factory/item-factory';
+import { SulfurasFactory } from './factory/sulfuras-factory';
+import { AgedBrieFactory } from './factory/aged-brie-factory';
+import { BackstagePassFactory } from './factory/backstage-pass-factory';
+import { ConjuredFactory } from './factory/conjured-factory';
+import { Item } from './item';
 
 export class GildedRose {
     static items: Array<Item>;
 
     constructor(items = [] as Array<Item>) {
         GildedRose.items = items;
+    }
+
+    static addItem(name: string, sellIn: number, quality: number) {
+        const category = getCategory(name);
+        let item: Item;
+        let itemFactory: ItemFactory;
+
+        switch (category) {
+            case ItemCategory.SULFURAS:
+                itemFactory = new SulfurasFactory();
+                break;
+            case ItemCategory.AGED_BRIE:
+                itemFactory = new AgedBrieFactory();
+
+                break;
+            case ItemCategory.BACKSTAGE_PASSES:
+                itemFactory = new BackstagePassFactory();
+                break;
+            case ItemCategory.CONJURED:
+                itemFactory = new ConjuredFactory();
+                break;
+            default:
+                itemFactory = new ItemFactory();
+                break;
+        }
+
+        item = itemFactory.createItem(name, sellIn, quality);
+
+        this.items.push(item);
     }
 
     static updateQuality() {
