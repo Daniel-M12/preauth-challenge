@@ -1,6 +1,6 @@
-import { Item } from "../item";
+import { ItemExtended } from "./item-extended";
 
-export class BackstagePass extends Item {
+export class BackstagePass extends ItemExtended {
   constructor(name: string, sellIn: number, quality: number) {
     super(name, sellIn, quality);
   }

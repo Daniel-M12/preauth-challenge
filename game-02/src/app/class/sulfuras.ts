@@ -1,8 +1,8 @@
-import { Item } from "../item";
+import { ItemExtended } from './item-extended';
 
-export class Sulfuras extends Item {
+export class Sulfuras extends ItemExtended {
     constructor(name: string, sellIn: number, quality: number) {
-        super(name, sellIn, quality);
+        super(name, 0, 80);
     }
 
     updateQuality() {
