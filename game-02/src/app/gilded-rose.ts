@@ -10,7 +10,7 @@ export class GildedRose {
 
     updateQuality() {
         for (let i = 0; i < this.items.length; i++) {
-            const itemWrapper = new ItemWrapper(this.items[i]);   
+            const itemWrapper = ItemWrapper.createItemWrapper(this.items[i]); 
             itemWrapper.updateQuality();
             
             const updatedItem = itemWrapper.getItem();

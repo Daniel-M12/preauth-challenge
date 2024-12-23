@@ -9,9 +9,13 @@ import { ItemCategory } from '../item-category';
 import { getCategory } from '../map-category-items';
 
 export class ItemWrapper {
-    private item: ItemExtended;
+    static item: ItemExtended;
+    static instance: ItemWrapper | null = null; 
 
-    constructor(item: Item) {
+    private constructor() {
+    }
+
+    static createItemWrapper(item: Item): ItemWrapper {
         let itemFactory: ItemFactory;
         const category = getCategory(item.name);
 
@@ -33,14 +37,20 @@ export class ItemWrapper {
                 break;
         }
 
-        this.item = itemFactory.createItem(item.name, item.sellIn, item.quality);
+        ItemWrapper.item = itemFactory.createItem(item.name, item.sellIn, item.quality);
+
+        if (ItemWrapper.instance === null) {
+            ItemWrapper.instance = new ItemWrapper();
+        }
+
+        return ItemWrapper.instance;
     }
 
     updateQuality() {
-        this.item.updateQuality();
+        ItemWrapper.item.updateQuality();
     }
 
     getItem() {
-        return this.item;
+        return ItemWrapper.item;
     }
 }
