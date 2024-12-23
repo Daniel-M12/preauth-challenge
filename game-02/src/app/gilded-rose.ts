@@ -8,13 +8,13 @@ import { ConjuredFactory } from './factory/conjured-factory';
 import { Item } from './item';
 
 export class GildedRose {
-    static items: Array<Item>;
+    items: Array<Item>;
 
-    constructor(items = [] as Array<Item>) {
-        GildedRose.items = items;
+    constructor() {
+        this.items = [];
     }
 
-    static addItem(name: string, sellIn: number, quality: number) {
+    addItem(name: string, sellIn: number, quality: number) {
         const category = getCategory(name);
         let item: Item;
         let itemFactory: ItemFactory;
@@ -43,7 +43,7 @@ export class GildedRose {
         this.items.push(item);
     }
 
-    static updateQuality() {
+    updateQuality() {
         for (let i = 0; i < this.items.length; i++) {
             const category = getCategory(this.items[i].name);
 
@@ -86,20 +86,20 @@ export class GildedRose {
         return this.items;
     }
 
-    private static increaseQualityForItem(itemNumber: number) {
+    private increaseQualityForItem(itemNumber: number) {
         if (this.items[itemNumber].quality < 50) {
             this.items[itemNumber].quality = this.items[itemNumber].quality + 1
         }
     }
 
-    private static decreaseQualityForItem(itemNumber: number) {
+    private decreaseQualityForItem(itemNumber: number) {
         if (this.items[itemNumber].quality > 0) {
             const multiplier = (getCategory(this.items[itemNumber].name) == ItemCategory.CONJURED)? 2 : 1;
             this.items[itemNumber].quality = this.items[itemNumber].quality - (1 * multiplier);
         }
     }
 
-    private static dropQualityToZero(itemNumber: number) {
+    private dropQualityToZero(itemNumber: number) {
         this.items[itemNumber].quality = 0;
     }
 }
